@@ -50,18 +50,10 @@ program msisexportparm
 
   implicit none
 
-  integer, parameter          :: nrec = 200
-
-  integer                     :: iyd, mass
-  real(4)                     :: sec, alt, glat, glong, stl, f107a, f107, ap(7), apd
-  real(4)                     :: d(9),t(2)
-  
-  integer                     :: i
-  character(128)              :: dummy
-
   !Initialize model
-
   call msisinit(parmpath='', parmfile='msis20.parm')
+
+  !export model to txt
   call exportparmset(outfile='msis20.parm.txt')
 
   stop
