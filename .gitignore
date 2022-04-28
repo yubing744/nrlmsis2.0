@@ -1,4 +1,4 @@
 build*/
 *.egg-info/
-*.parm
 msis2driver.*
+CMakeFiles
