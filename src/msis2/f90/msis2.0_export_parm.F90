@@ -44,9 +44,9 @@
 !==================================================================================================
 ! MSISTEST: Test program for NRLMSIS 2.0
 !==================================================================================================
-program msistest
+program msisexportparm
 
-  use msis_param_export, only          : msisexport
+  use msis_init, only          : msisinit, exportparmset
 
   implicit none
 
@@ -61,8 +61,9 @@ program msistest
 
   !Initialize model
 
-  call msisexport(parmpath='', parmfile='msis20.parm', outfile='msis2.0_param.txt')
+  call msisinit(parmpath='', parmfile='msis20.parm')
+  call exportparmset(outfile='msis20.parm.txt')
 
   stop
 
-end program msistest
+end program msisexportparm

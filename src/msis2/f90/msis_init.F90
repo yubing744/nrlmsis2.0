@@ -1,11 +1,11 @@
 !##############################################################################
-! MSIS® (NRL-SOF-014-1) SOFTWARE
+! MSISï¿½ (NRL-SOF-014-1) SOFTWARE
 !
-! MSIS® is a registered trademark of the Government of the United States of 
+! MSISï¿½ is a registered trademark of the Government of the United States of 
 ! America, as represented by the Secretary of the Navy. Unauthorized use of 
 ! the trademark is prohibited. 
 !
-! The MSIS® Software (hereinafter Software) is property of the United States 
+! The MSISï¿½ Software (hereinafter Software) is property of the United States 
 ! Government, as represented by the Secretary of the Navy. Methods performed
 ! by this software are covered by U.S. Patent Number 10,641,925. The Government
 ! of the United States of America, as represented by the Secretary of the Navy, 
@@ -16,12 +16,12 @@
 ! Software or any supporting data to any other person or entity who will use 
 ! the Software for any non-academic, commercial purposes, or (iv) copy the 
 ! Software or any documentation related thereto except for (a) distribution 
-! among the user’s personal computer systems, archival, or emergency repair 
+! among the userï¿½s personal computer systems, archival, or emergency repair 
 ! purposes, or (b) distribution for non-commercial, academic purposes, without 
 ! first obtaining the written consent of IP Counsel for the Naval Research 
 ! Laboratory. 
 !
-! As the owner of MSIS®, the United States, the United States Department of 
+! As the owner of MSISï¿½, the United States, the United States Department of 
 ! Defense, and their employees: (1) Disclaim any warranties, express, or 
 ! implied, including but not limited to any implied warranties of 
 ! merchantability, fitness for a particular purpose, title or non-infringement, 
@@ -657,5 +657,54 @@ contains
     enddo
   
   end subroutine tretrv
+
+!==================================================================================================
+  ! LOADPARMSET: Read in a parameter file
+  !==================================================================================================
+  subroutine exportparmset(outfile)
+    implicit none
+
+    character(len=*), intent(in) :: outfile
+  
+    open(78,file=outfile,status='replace')
+
+    call outsubset(78, "TN", TN%beta)
+    call outsubset(78, "PR", PR%beta)
+    call outsubset(78, "N2", N2%beta)
+    call outsubset(78, "O2", O2%beta)
+    call outsubset(78, "O1", O1%beta)
+    call outsubset(78, "HE", HE%beta)
+    call outsubset(78, "H1", H1%beta)
+    call outsubset(78, "AR", AR%beta)
+    call outsubset(78, "N1", N1%beta)
+    call outsubset(78, "OA", OA%beta)
+    call outsubset(78, "NO", NO%beta)
+
+    close(78)
+
+    return
+
+  end subroutine exportparmset
+
+
+  subroutine outsubset(oun, name, a)
+    implicit none
+
+    character(len=*), intent(in) :: name
+    real(4), dimension (:,:) :: a
+    integer, intent(in)          :: oun
+    integer::i,s1
+
+    s1 = size(a, dim=1)
+
+    Print *, name
+    write(oun, *) name
+
+    do i = 1, s1
+      Print *, a(i,:)
+      write(oun, *) a(i,:)  
+    end do
+
+  end subroutine outsubset
 
 end module msis_init

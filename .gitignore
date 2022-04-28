@@ -3,3 +3,5 @@ build*/
 msis2driver.*
 CMakeFiles
 *.mod
+msis2.0_test
+msis2.0_export_parm
